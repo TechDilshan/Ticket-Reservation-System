@@ -177,6 +177,10 @@ const VendorDashboard = () => {
                     <h2 className="text-xl font-semibold">Customer Retrieval Rate</h2>
                     <p className="text-2xl">{customerRetrievalRate.toFixed(2)}%</p>
                 </div>
+                <div className="bg-white p-4 rounded shadow text-center">
+                    <h2 className="text-xl font-semibold">Total Purches No.Of Tickets</h2>
+                    <p className="text-2xl">{purches}</p>
+                </div>
                
             </div>
             <form onSubmit={handleSubmit} className="space-y-4 mb-6">
