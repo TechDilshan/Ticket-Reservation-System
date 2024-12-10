@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Login from './pages/login';
+import SingUp from './pages/singup';
 import VendorDashboard from './pages/VendorDashboard';
 import CustomerDashboard from './pages/CustomerDashboard';
 
@@ -15,6 +16,7 @@ root.render(
   <Routes>
       <Route path='/' element={<App />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/singup' element={<SingUp />} />
       <Route path='/vendors' element={<VendorDashboard />} />
       <Route path='/customer' element={<CustomerDashboard />} />
   </Routes>
