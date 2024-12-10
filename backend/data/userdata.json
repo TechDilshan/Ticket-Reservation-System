@@ -13,32 +13,8 @@
       "name": "Bhathiya",
       "email": "bhathiya@gmail.com",
       "number": "0765893125",
-      "password": "xyz123",
+      "password": "abc123",
       "type": "vendor"
-    },
-    {
-      "id": 103,
-      "name": "Bhathiya123",
-      "email": "bhathiya@gmail.com",
-      "number": "0765893125",
-      "password": "xyz123",
-      "type": "vendor"
-    },
-    {
-      "id": 104,
-      "name": "Kasun",
-      "email": "kasun@gmail.com",
-      "number": "0789654875",
-      "password": "Kasun123",
-      "type": "vendor"
-    },
-    {
-      "id": 105,
-      "name": "gamini",
-      "email": "gamini@gmail.com",
-      "number": "0789564879",
-      "password": "Gamini123",
-      "type": "customer"
     }
   ]
 }

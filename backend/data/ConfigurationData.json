@@ -1,12 +1,8 @@
 {
   "configuration": [
     {
-      "customerID": 104,
-      "ticketCapacity": 1
-    },
-    {
       "customerID": 102,
-      "ticketCapacity": 1
+      "ticketCapacity": 2
     }
   ]
 }

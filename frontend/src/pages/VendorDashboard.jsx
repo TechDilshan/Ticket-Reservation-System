@@ -20,6 +20,7 @@ const VendorDashboard = () => {
     const [price, setPrice] = useState(0.00);
     const [dateTime, setDateTime] = useState('');
     const [openModal, setOpenModal] = useState(false);
+    const [purches, setPurches] = useState([]);
 
     const CusId = Number(sessionStorage.getItem('CusId'));
 
@@ -56,6 +57,9 @@ const VendorDashboard = () => {
                 const response = await Axios.post('http://localhost:5001/api/createconfiguration', payload);
                 console.log('Configuration created successfully:', response.data);
             }
+            alert('Configuration updated successfully');
+            fetchConfiguration();
+
         } catch (error) {
             console.error('Axios Error: ', error);
         }
@@ -87,6 +91,9 @@ const VendorDashboard = () => {
                 setDateTime('');
                 setLocation('');
                 setPrice(0);
+
+                alert('Ticket added successfully');
+                setOpenModal(false);
             })
             .catch((error) => {
               console.error('Axios Error: ', error);
@@ -103,8 +110,10 @@ const VendorDashboard = () => {
 
     useEffect(() => {
         setTicketReleaseRate(maxTicketCapacity/totalTickets*100 || 0);
+        setCustomerRetrievalRate(purches/totalTickets*100 || 0);
         fetchConfiguration();
-    }, [maxTicketCapacity]);
+        fetchPurches();
+    }, [maxTicketCapacity,purches]);
 
 
     const fetchMaxIdAndSetId = async () => {
@@ -112,6 +121,16 @@ const VendorDashboard = () => {
           const response = await Axios.get('http://localhost:5001/api/total-tickets');
           const maxId = response.data?.total || 0; 
           setTotalTickets(maxId);
+        } catch (error) {
+          console.error('Axios Error (getMaxId): ', error);
+        }
+      };
+
+      const fetchPurches = async () => {
+        try {
+          const response = await Axios.get('http://localhost:5001/api/total-purches');
+          const maxId = response.data?.total || 0; 
+          setPurches(maxId);
         } catch (error) {
           console.error('Axios Error (getMaxId): ', error);
         }
@@ -156,7 +175,7 @@ const VendorDashboard = () => {
                 </div>
                 <div className="bg-white p-4 rounded shadow text-center">
                     <h2 className="text-xl font-semibold">Customer Retrieval Rate</h2>
-                    <p className="text-2xl">{customerRetrievalRate}</p>
+                    <p className="text-2xl">{customerRetrievalRate.toFixed(2)}%</p>
                 </div>
                
             </div>

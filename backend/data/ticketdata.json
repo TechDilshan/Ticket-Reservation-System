@@ -5,35 +5,42 @@
       "eventName": "Party",
       "dateTime": "2024-12-19T13:13",
       "location": "Colombo",
-      "price": "1000"
+      "price": 1000
     },
     {
-      "ticketID": "Too2",
-      "eventName": "Abc",
-      "dateTime": "2024-12-19T13:24",
-      "location": "KAduwela",
-      "price": "45656"
-    },
-    {
-      "ticketID": "T003",
+      "ticketID": "T002",
       "eventName": "Hee",
       "dateTime": "2024-12-12T13:25",
       "location": "Aaa",
-      "price": "2000"
+      "price": 2000
     },
     {
-      "ticketID": "T004",
+      "ticketID": "T003",
       "eventName": "Good",
       "dateTime": "2024-12-19T16:40",
       "location": "Maharagama",
       "price": 5000
     },
     {
-      "ticketID": "T005",
+      "ticketID": "T004",
       "eventName": "vvvv",
       "dateTime": "2024-12-25T16:53",
       "location": "Jaffna",
       "price": 8000
+    },
+    {
+      "ticketID": "T005",
+      "eventName": "kamal",
+      "dateTime": "2024-11-29T19:49",
+      "location": "Makubura",
+      "price": 4444
+    },
+    {
+      "ticketID": "T006",
+      "eventName": "kk",
+      "dateTime": "2024-12-05T19:50",
+      "location": "Malabe",
+      "price": 3222
     }
   ]
 }
