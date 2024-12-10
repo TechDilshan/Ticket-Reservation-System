@@ -15,6 +15,14 @@
       "number": "0765893125",
       "password": "xyz123",
       "type": "vendors"
+    },
+    {
+      "id": 3,
+      "name": "Bhathiya123",
+      "email": "bhathiya@gmail.com",
+      "number": "0765893125",
+      "password": "xyz123",
+      "type": "vendors"
     }
   ]
 }

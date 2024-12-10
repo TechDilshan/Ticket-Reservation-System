@@ -1,0 +1,12 @@
+{
+  "tickets": [
+    {
+      "id": 1,
+      "eventName": "party",
+      "eventDate": "2024/12/12",
+      "eventTime": "04:12PM",
+      "eventLocation": "Malabe",
+      "eventPrice": 1000
+    }
+  ]
+}
