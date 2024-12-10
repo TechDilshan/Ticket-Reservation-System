@@ -83,31 +83,48 @@ const VendorDashboard = () => {
     return (
         <div className="max-w-4xl mx-auto p-4">
           <Navbar/>
-            <h1 className="text-3xl font-bold mb-6">Vendor Dashboard</h1>
+            <div className="text-center pt-5">
+                <h1 className="text-3xl font-bold mb-6">Vendor Dashboard</h1>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4 rounded shadow text-center">
                     <h2 className="text-xl font-semibold">Total Tickets Available</h2>
                     <p className="text-2xl">{totalTickets}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4 rounded shadow text-center">
+                    <h2 className="text-xl font-semibold">Maximum Current Capacity</h2>
+                    <p className="text-2xl">{maxTicketCapacity}</p>
+                </div>
+                <div className="bg-white p-4 rounded shadow text-center">
                     <h2 className="text-xl font-semibold">Current Release Rate</h2>
                     <p className="text-2xl">{ticketReleaseRate}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
+                <div className="bg-white p-4 rounded shadow text-center">
                     <h2 className="text-xl font-semibold">Customer Retrieval Rate</h2>
                     <p className="text-2xl">{customerRetrievalRate}</p>
                 </div>
-                <div className="bg-white p-4 rounded shadow">
-                    <h2 className="text-xl font-semibold">Current Capacity</h2>
-                    <p className="text-2xl">{currentCapacity}</p>
-                    <div className="h-2 bg-blue-200 rounded">
-                        <div
-                            className="h-full bg-blue-500 rounded"
-                            style={{ width: `${(currentCapacity / maxTicketCapacity) * 100}%` }}
-                        />
-                    </div>
-                </div>
+               
             </div>
+            <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+                <div>
+                    <label className="block text-sm font-medium">Maximum Ticket Capacity</label>
+                    <input
+                        type="number"
+                        value={maxTicketCapacity}
+                        onChange={(e) => setMaxTicketCapacity(Number(e.target.value))}
+                        className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                        required
+                        disabled={isActive}
+                    />
+                </div>
+                {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                        <strong className="font-bold">Error!</strong>
+                        <span className="block sm:inline">{error}</span>
+                    </div>
+                )}
+                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md">Update Configuration</button>
+            </form>
             <button onClick={() => setOpenModal(true)} className="w-full bg-blue-500 text-white p-2 rounded-md">Add Tickets</button>
             {openModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -170,64 +187,7 @@ const VendorDashboard = () => {
                     </div>
                 </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-4 mb-6">
-                <div>
-                    <label className="block text-sm font-medium">Total Number of Tickets</label>
-                    <input
-                        type="number"
-                        value={totalTickets}
-                        onChange={(e) => setTotalTickets(Number(e.target.value))}
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium">Ticket Release Rate</label>
-                    <input
-                        type="number"
-                        value={ticketReleaseRate}
-                        onChange={(e) => setTicketReleaseRate(Number(e.target.value))}
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                        required
-                        disabled={isActive}
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium">Customer Retrieval Rate</label>
-                    <input
-                        type="number"
-                        value={customerRetrievalRate}
-                        onChange={(e) => setCustomerRetrievalRate(Number(e.target.value))}
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                        required
-                        disabled={isActive}
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium">Maximum Ticket Capacity</label>
-                    <input
-                        type="number"
-                        value={maxTicketCapacity}
-                        onChange={(e) => setMaxTicketCapacity(Number(e.target.value))}
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                        required
-                        disabled={isActive}
-                    />
-                </div>
-                {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                        <strong className="font-bold">Error!</strong>
-                        <span className="block sm:inline">{error}</span>
-                    </div>
-                )}
-                <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md">Update Configuration</button>
-            </form>
-            <button
-                onClick={toggleSystem}
-                className={`w-full p-2 rounded-md ${isActive ? 'bg-red-500' : 'bg-green-500'} text-white`}
-            >
-                {isActive ? 'Stop System' : 'Start System'}
-            </button>
+            
             {loading && <div className="mt-4">Loading...</div>}
         </div>
     );
