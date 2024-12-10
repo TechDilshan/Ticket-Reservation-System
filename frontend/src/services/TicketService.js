@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/tickets'; // Replace with your actual API URL
+const API_URL = 'http://localhost:5001/api/tickets'; // Replace with your actual API URL
 
 const TicketService = {
     getAllTickets: async () => {

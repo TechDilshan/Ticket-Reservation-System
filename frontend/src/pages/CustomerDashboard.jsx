@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TicketService from '../services/TicketService'; // Adjust the path as necessary
 import Navbar from '../component/navbar';
+import Axios from 'axios';
 
 const CustomerDashboard = () => {
     const [tickets, setTickets] = useState([]);
@@ -33,6 +34,26 @@ const CustomerDashboard = () => {
        console.log(ticket.price);
        console.log(CusId);
        console.log(userName);
+
+       const payload = {
+        customerID : CusId,
+        customerName: userName,
+        ticketID : ticket.ticketID,
+        eventName: ticket.eventName,
+        dateTime: ticket.dateTime,
+        location: ticket.location,
+        price: ticket.price
+      };
+  
+      // Create new Client using url
+      Axios.post('http://localhost:5001/api/createpurches', payload)
+        .then((response) => {
+          console.log('Ticket saved successfully:', response.data);
+          alert('Ticket purchased successfully');
+        })
+        .catch((error) => {
+          console.error('Axios Error: ', error);
+        });
     };
 
     if (loading) return <div>Loading...</div>;

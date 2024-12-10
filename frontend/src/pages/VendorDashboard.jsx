@@ -49,11 +49,11 @@ const VendorDashboard = () => {
             // Check if there's existing data (you can adjust this logic as needed)
             if (maxTicketCapacityOld > 0) {
                 // Update existing configuration
-                const response = await Axios.put(`http://localhost:5000/api/updateconfiguration/${CusId}`, payload);
+                const response = await Axios.put(`http://localhost:5001/api/updateconfiguration/${CusId}`, payload);
                 console.log('Configuration updated successfully:', response.data);
             } else {
                 // Create new configuration
-                const response = await Axios.post('http://localhost:5000/api/createconfiguration', payload);
+                const response = await Axios.post('http://localhost:5001/api/createconfiguration', payload);
                 console.log('Configuration created successfully:', response.data);
             }
         } catch (error) {
@@ -79,7 +79,7 @@ const VendorDashboard = () => {
           };
       
           // Create new Client using url
-          Axios.post('http://localhost:5000/api/createtickets', payload)
+          Axios.post('http://localhost:5001/api/createtickets', payload)
             .then((response) => {
               console.log('Ticket saved successfully:', response.data);
                 setTicketID('');
@@ -109,7 +109,7 @@ const VendorDashboard = () => {
 
     const fetchMaxIdAndSetId = async () => {
         try {
-          const response = await Axios.get('http://localhost:5000/api/total-tickets');
+          const response = await Axios.get('http://localhost:5001/api/total-tickets');
           const maxId = response.data?.total || 0; 
           setTotalTickets(maxId);
         } catch (error) {
@@ -119,7 +119,7 @@ const VendorDashboard = () => {
 
       const fetchConfiguration = async () => {
         try {
-          const response = await Axios.get(`http://localhost:5000/api/configuration/${CusId}`);
+          const response = await Axios.get(`http://localhost:5001/api/configuration/${CusId}`);
           const maxId = response.data?.ticketCapacity || 0; 
           setMaxTicketCapacityOld(maxId);
         } catch (error) {

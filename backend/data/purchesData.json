@@ -8,6 +8,24 @@
       "dateTime": "45454",
       "location": "malabr",
       "price": 4000
+    },
+    {
+      "customerID": 101,
+      "customerName": "Dilshan",
+      "ticketID": "T001",
+      "eventName": "Party",
+      "dateTime": "2024-12-19T13:13",
+      "location": "Colombo",
+      "price": "1000"
+    },
+    {
+      "customerID": 101,
+      "customerName": "Dilshan",
+      "ticketID": "T001",
+      "eventName": "Party",
+      "dateTime": "2024-12-19T13:13",
+      "location": "Colombo",
+      "price": "1000"
     }
   ]
 }

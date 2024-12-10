@@ -11,7 +11,7 @@ function Login() {
         e.preventDefault();
         
         try {
-            const response = await axios.get(`http://localhost:5000/api/users/${email}`);
+            const response = await axios.get(`http://localhost:5001/api/users/${email}`);
 
             if(response.data.password === password){
                 const userType = response.data.type;
