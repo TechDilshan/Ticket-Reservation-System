@@ -16,7 +16,9 @@ function Login() {
             if(response.data.password === password){
                 const userType = response.data.type;
                 const CusId = response.data.id;
+                const CusName = response.data.name;
                 sessionStorage.setItem('CusId', CusId);
+                sessionStorage.setItem('CusName', CusName);
                 
                 if (userType === 'customer') {
                     navigate('/customer');

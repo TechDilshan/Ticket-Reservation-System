@@ -6,6 +6,8 @@ const CustomerDashboard = () => {
     const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const CusId = Number(sessionStorage.getItem('CusId'));
+    const userName = sessionStorage.getItem('CusName');
 
     useEffect(() => {
         const fetchTickets = async () => {
@@ -22,14 +24,15 @@ const CustomerDashboard = () => {
         fetchTickets();
     }, []);
 
-    const handlePurchase = async (ticketId) => {
-        try {
-            await TicketService.purchaseTicket(ticketId);
-            alert('Ticket purchased successfully!');
-            // Optionally, refresh the ticket list or update state
-        } catch (err) {
-            alert('Failed to purchase ticket');
-        }
+    const handlePurchase = async (ticket) => {
+
+       console.log(ticket.ticketID);
+       console.log(ticket.eventName);
+       console.log(ticket.dateTime);
+       console.log(ticket.location);
+       console.log(ticket.price);
+       console.log(CusId);
+       console.log(userName);
     };
 
     if (loading) return <div>Loading...</div>;
@@ -49,7 +52,7 @@ const CustomerDashboard = () => {
                         Date And Time: <span className="font-medium">{new Date(ticket.dateTime).toLocaleString()}</span> <br/>
                         Price: <span className="font-medium">Rs. {ticket.price}</span> <br/>
                         <button 
-                            onClick={() => handlePurchase(ticket.id)} 
+                            onClick={() => handlePurchase(ticket)} 
                             className="mt-2 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                         >
                             Purchase
