@@ -1,11 +1,11 @@
 {
   "configuration": [
     {
-      "customerID": 5000,
-      "ticketCapacity": 2
+      "customerID": 104,
+      "ticketCapacity": 1
     },
     {
-      "customerID": 6000,
+      "customerID": 102,
       "ticketCapacity": 1
     }
   ]

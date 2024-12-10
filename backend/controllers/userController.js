@@ -7,7 +7,7 @@ const getUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-    const userId = Number(req.params.id);
+    const userId = String(req.params.id);
     const user = userModel.getUserById(userId);
     
     if (user) {

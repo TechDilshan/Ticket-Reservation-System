@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": 101,
       "name": "Dilshan",
       "email": "dilshan@gmail.com",
       "number": "0785965458",
@@ -9,28 +9,36 @@
       "type": "customer"
     },
     {
-      "id": 2,
+      "id": 102,
       "name": "Bhathiya",
       "email": "bhathiya@gmail.com",
       "number": "0765893125",
       "password": "xyz123",
-      "type": "vendors"
+      "type": "vendor"
     },
     {
-      "id": 3,
+      "id": 103,
       "name": "Bhathiya123",
       "email": "bhathiya@gmail.com",
       "number": "0765893125",
       "password": "xyz123",
-      "type": "vendors"
+      "type": "vendor"
     },
     {
-      "id": 4,
+      "id": 104,
       "name": "Kasun",
       "email": "kasun@gmail.com",
       "number": "0789654875",
       "password": "Kasun123",
       "type": "vendor"
+    },
+    {
+      "id": 105,
+      "name": "gamini",
+      "email": "gamini@gmail.com",
+      "number": "0789564879",
+      "password": "Gamini123",
+      "type": "customer"
     }
   ]
 }

@@ -21,6 +21,8 @@ const VendorDashboard = () => {
     const [dateTime, setDateTime] = useState('');
     const [openModal, setOpenModal] = useState(false);
 
+    const CusId = Number(sessionStorage.getItem('CusId'));
+
     useEffect(() => {
         let interval;
         if (isActive) {
@@ -39,7 +41,7 @@ const VendorDashboard = () => {
         e.preventDefault();
         
         const payload = {
-            customerID: 6000,
+            customerID: CusId,
             ticketCapacity: maxTicketCapacity,
         };
 
@@ -47,7 +49,7 @@ const VendorDashboard = () => {
             // Check if there's existing data (you can adjust this logic as needed)
             if (maxTicketCapacityOld > 0) {
                 // Update existing configuration
-                const response = await Axios.put('http://localhost:5000/api/updateconfiguration/6000', payload);
+                const response = await Axios.put(`http://localhost:5000/api/updateconfiguration/${CusId}`, payload);
                 console.log('Configuration updated successfully:', response.data);
             } else {
                 // Create new configuration
@@ -117,7 +119,7 @@ const VendorDashboard = () => {
 
       const fetchConfiguration = async () => {
         try {
-          const response = await Axios.get('http://localhost:5000/api/configuration/6000');
+          const response = await Axios.get(`http://localhost:5000/api/configuration/${CusId}`);
           const maxId = response.data?.ticketCapacity || 0; 
           setMaxTicketCapacityOld(maxId);
         } catch (error) {

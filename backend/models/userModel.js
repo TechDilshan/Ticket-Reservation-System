@@ -20,7 +20,7 @@ const getAllUsers = () => {
 
 const getUserById = (id) => {
     const data = readData();
-    return data.users.find(user => user.id === id);
+    return data.users.find(user => user.email === id);
 };
 
 const createUser = (user) => {

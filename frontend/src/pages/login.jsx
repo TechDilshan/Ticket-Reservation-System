@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here
+        
+        try {
+            const response = await axios.get(`http://localhost:5000/api/users/${email}`);
+
+            if(response.data.password === password){
+                const userType = response.data.type;
+                const CusId = response.data.id;
+                sessionStorage.setItem('CusId', CusId);
+                
+                if (userType === 'customer') {
+                    navigate('/customer');
+                } else if (userType === 'vendor') {
+                    navigate('/vendors');
+                }
+
+            } else {
+                alert('Login failed: Incorrect password');
+                console.error('Login failed: Incorrect password');
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+            alert('Login failed: User not found');
+        }
     };
 
     return (

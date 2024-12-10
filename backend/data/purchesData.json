@@ -1,0 +1,13 @@
+{
+  "purches": [
+    {
+      "customerID": 100,
+      "customerName": "dila",
+      "ticketID": 12,
+      "eventName": "new",
+      "dateTime": "45454",
+      "location": "malabr",
+      "price": 4000
+    }
+  ]
+}
