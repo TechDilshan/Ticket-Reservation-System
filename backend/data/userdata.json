@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Dilshan",
+      "email": "dilshan@gmail.com",
+      "number": "0785965458",
+      "password": "abc123",
+      "type": "customer"
+    },
+    {
+      "id": 2,
+      "name": "Bhathiya",
+      "email": "bhathiya@gmail.com",
+      "number": "0765893125",
+      "password": "xyz123",
+      "type": "vendors"
+    }
+  ]
+}
