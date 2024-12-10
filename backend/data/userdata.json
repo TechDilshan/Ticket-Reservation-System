@@ -23,6 +23,14 @@
       "number": "0765893125",
       "password": "xyz123",
       "type": "vendors"
+    },
+    {
+      "id": 4,
+      "name": "Kasun",
+      "email": "kasun@gmail.com",
+      "number": "0789654875",
+      "password": "Kasun123",
+      "type": "vendor"
     }
   ]
 }

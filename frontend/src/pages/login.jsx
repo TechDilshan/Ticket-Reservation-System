@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -38,7 +38,11 @@ function Login() {
                 <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
                     Login
                 </button>
+                <div className="mt-4 text-center">
+                <p>Don't have an account? Please <Link to="/singup" className="text-blue-500 hover:text-blue-700"> sign up</Link>.</p>
+            </div>
             </form>
+            
         </div>
     );
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -9,6 +11,28 @@ const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const payload = {
+            name: name,
+            email: email,
+            number: contactNumber,
+            password: password,
+            type: userType,
+          };
+      
+          // Create new Client using url
+          Axios.post('http://localhost:5000/api/createusers', payload)
+            .then((response) => {
+              console.log('Ticket saved successfully:', response.data);
+              setName('');
+              setEmail('');
+              setContactNumber('');
+              setPassword('');
+              setUserType('');
+            })
+            .catch((error) => {
+              console.error('Axios Error: ', error);
+            });
         // Handle sign-up logic here
         console.log({ name, email, password, contactNumber, userType });
     };
@@ -80,6 +104,9 @@ const Signup = () => {
                 <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
                     Sign Up
                 </button>
+            <div className="mt-4 text-center">
+                <p>Already have an account? <Link to="/login" className="text-blue-500 hover:text-blue-700">Please login</Link>.</p>
+            </div>
             </form>
         </div>
     );
