@@ -7,6 +7,7 @@ const VendorDashboard = () => {
     const [ticketReleaseRate, setTicketReleaseRate] = useState(0);
     const [customerRetrievalRate, setCustomerRetrievalRate] = useState(0);
     const [maxTicketCapacity, setMaxTicketCapacity] = useState(0);
+    const [maxTicketCapacityOld, setMaxTicketCapacityOld] = useState(0);
     const [currentCapacity, setCurrentCapacity] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [error, setError] = useState('');
@@ -34,23 +35,27 @@ const VendorDashboard = () => {
         };
     }, [isActive, ticketReleaseRate, maxTicketCapacity]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
+        
+        const payload = {
+            customerID: 6000,
+            ticketCapacity: maxTicketCapacity,
+        };
 
-        // Validate inputs
-        if (totalTickets <= 0 || ticketReleaseRate <= 0 || customerRetrievalRate <= 0 || maxTicketCapacity <= 0) {
-            setError('All values must be positive numbers.');
-            return;
-        }
-        if (maxTicketCapacity > totalTickets) {
-            setError('Maximum capacity cannot exceed total tickets.');
-            return;
-        }
-
-        // Reset current capacity if the system is started
-        if (!isActive) {
-            setCurrentCapacity(0);
+        try {
+            // Check if there's existing data (you can adjust this logic as needed)
+            if (maxTicketCapacityOld > 0) {
+                // Update existing configuration
+                const response = await Axios.put('http://localhost:5000/api/updateconfiguration/6000', payload);
+                console.log('Configuration updated successfully:', response.data);
+            } else {
+                // Create new configuration
+                const response = await Axios.post('http://localhost:5000/api/createconfiguration', payload);
+                console.log('Configuration created successfully:', response.data);
+            }
+        } catch (error) {
+            console.error('Axios Error: ', error);
         }
     };
 
@@ -96,6 +101,7 @@ const VendorDashboard = () => {
 
     useEffect(() => {
         setTicketReleaseRate(maxTicketCapacity/totalTickets*100 || 0);
+        fetchConfiguration();
     }, [maxTicketCapacity]);
 
 
@@ -108,6 +114,24 @@ const VendorDashboard = () => {
           console.error('Axios Error (getMaxId): ', error);
         }
       };
+
+      const fetchConfiguration = async () => {
+        try {
+          const response = await Axios.get('http://localhost:5000/api/configuration/6000');
+          const maxId = response.data?.ticketCapacity || 0; 
+          setMaxTicketCapacityOld(maxId);
+        } catch (error) {
+          console.error('Axios Error (getMaxId): ', error);
+        }
+      };
+
+    useEffect(() => {
+        fetchConfiguration();
+    }, []);
+
+    useEffect(() => {
+        setMaxTicketCapacity(maxTicketCapacityOld); // Set initial value to maxTicketCapacityOld
+    }, [maxTicketCapacityOld]); // Update when maxTicketCapacityOld changes
 
     return (
         <div className="max-w-4xl mx-auto p-4">
@@ -137,6 +161,7 @@ const VendorDashboard = () => {
             <form onSubmit={handleSubmit} className="space-y-4 mb-6">
                 <div>
                     <label className="block text-sm font-medium">Maximum Ticket Capacity</label>
+                    <p className="text-sm text-gray-500">Current: {maxTicketCapacityOld}</p>
                     <input
                         type="number"
                         value={maxTicketCapacity}

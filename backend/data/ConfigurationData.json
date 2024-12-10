@@ -1,0 +1,12 @@
+{
+  "configuration": [
+    {
+      "customerID": 5000,
+      "ticketCapacity": 2
+    },
+    {
+      "customerID": 6000,
+      "ticketCapacity": 1
+    }
+  ]
+}

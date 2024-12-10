@@ -4,12 +4,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
 const ticketRoutes = require('./routes/ticketRoutes');
+const confRoutes = require('./routes/confRoutes');
 
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/api', userRoutes, ticketRoutes);
+app.use('/api', userRoutes, ticketRoutes, confRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
