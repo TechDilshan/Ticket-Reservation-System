@@ -32,12 +32,11 @@ const createTicket = (ticket) => {
 
     // Create the new user object with the new ID
     const newTicket = {
-        id: newTicketId, // Assign the new ID
+        ticketID: ticket.ticketID, // Assign the new ID
         eventName: ticket.eventName,
-        eventDate: ticket.eventDate,
-        eventTime: ticket.eventTime,
-        eventLocation: ticket.eventLocation,
-        eventPrice: ticket.eventPrice,
+        dateTime: ticket.dateTime,
+        location: ticket.location,
+        price: ticket.price,
     };
 
     data.tickets.push(newTicket);
@@ -68,10 +67,16 @@ const deleteTicket = (id) => {
     writeData({ tickets: filteredTickets });
 };
 
+const getTotalTickets = () => {
+    const data = readData();
+    return data.tickets.length;
+};
+
 module.exports = {
     getAllTickets,
     getTicketById,
     createTicket,
     updateTicket,
-    deleteTicket
+    deleteTicket,
+    getTotalTickets
 };

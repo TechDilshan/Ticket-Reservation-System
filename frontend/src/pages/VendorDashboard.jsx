@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../component/navbar';
+import Axios from 'axios';
 
 const VendorDashboard = () => {
     const [totalTickets, setTotalTickets] = useState(0);
@@ -15,7 +16,7 @@ const VendorDashboard = () => {
     const [eventName, setEventName] = useState('');
     const [time, setTime] = useState('');
     const [location, setLocation] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(0.00);
     const [dateTime, setDateTime] = useState('');
     const [openModal, setOpenModal] = useState(false);
 
@@ -60,25 +61,53 @@ const VendorDashboard = () => {
         }
     };
 
-    const addNewTickets = () => {
-        if (newTickets > 0) {
-            console.log({
-                ticketID,
-                eventName,
-                time,
-                location,
-                price,
-                quantity: newTickets
+    const addNewTickets = async () => {
+
+        const payload = {
+            ticketID: ticketID,
+            eventName: eventName,
+            dateTime: dateTime,
+            location: location,
+            price: price,
+          };
+      
+          // Create new Client using url
+          Axios.post('http://localhost:5000/api/createtickets', payload)
+            .then((response) => {
+              console.log('Ticket saved successfully:', response.data);
+                setTicketID('');
+                setEventName('');
+                setDateTime('');
+                setLocation('');
+                setPrice(0);
+            })
+            .catch((error) => {
+              console.error('Axios Error: ', error);
             });
-            setTotalTickets((prev) => prev + newTickets);
-            setNewTickets(0);
-            setTicketID('');
-            setEventName('');
-            setTime('');
-            setLocation('');
-            setPrice(0);
-        }
     };
+
+    useEffect(() => {
+        const intervalId = setInterval(fetchMaxIdAndSetId, 1000); // Refresh every 5 seconds
+    
+        fetchMaxIdAndSetId();
+        return () => clearInterval(intervalId);
+      }, [totalTickets]);
+
+
+    useEffect(() => {
+        setTicketReleaseRate(maxTicketCapacity/totalTickets*100 || 0);
+    }, [maxTicketCapacity]);
+
+
+    const fetchMaxIdAndSetId = async () => {
+        try {
+          const response = await Axios.get('http://localhost:5000/api/total-tickets');
+          const maxId = response.data?.total || 0; 
+          setTotalTickets(maxId);
+        } catch (error) {
+          console.error('Axios Error (getMaxId): ', error);
+        }
+      };
 
     return (
         <div className="max-w-4xl mx-auto p-4">
@@ -97,7 +126,7 @@ const VendorDashboard = () => {
                 </div>
                 <div className="bg-white p-4 rounded shadow text-center">
                     <h2 className="text-xl font-semibold">Current Release Rate</h2>
-                    <p className="text-2xl">{ticketReleaseRate}</p>
+                    <p className="text-2xl">{ticketReleaseRate.toFixed(2)}%</p>
                 </div>
                 <div className="bg-white p-4 rounded shadow text-center">
                     <h2 className="text-xl font-semibold">Customer Retrieval Rate</h2>
@@ -111,7 +140,17 @@ const VendorDashboard = () => {
                     <input
                         type="number"
                         value={maxTicketCapacity}
-                        onChange={(e) => setMaxTicketCapacity(Number(e.target.value))}
+                        onChange={(e) => {
+                            const value = Number(e.target.value);
+                            // Automatically adjust maxTicketCapacity if it exceeds totalTickets
+                            if (value > totalTickets) {
+                                setMaxTicketCapacity(totalTickets);
+                                setError('Maximum capacity has been adjusted to total tickets.');
+                            } else {
+                                setMaxTicketCapacity(value);
+                                setError(''); // Clear error if the value is valid
+                            }
+                        }}
                         className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                         required
                         disabled={isActive}
@@ -174,9 +213,9 @@ const VendorDashboard = () => {
                                 <label className="block text-sm font-medium">Price</label>
                                 <input
                                     type="text"
-                                    value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    pattern="[0-9]*([.,][0-9]+)?"
+                                    value={price.toFixed(2)}
+                                    onChange={(e) => setPrice(Number(e.target.value))}
+                                    pattern="[0-9]*([.,][0-9]{0,2})?"
                                     className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                                     required
                                 />

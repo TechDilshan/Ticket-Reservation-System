@@ -53,10 +53,16 @@ const deleteTicket = (req, res) => {
     }
 };
 
+const getTotalTickets = (req, res) => {
+    const totalTickets = ticketModel.getTotalTickets();
+    res.json({ total: totalTickets });
+};
+
 module.exports = {
     getTickets,
     getTicket,
     createTicket,
     updateTicket,
-    deleteTicket
+    deleteTicket,
+    getTotalTickets
 };

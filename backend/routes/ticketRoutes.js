@@ -8,5 +8,6 @@ router.get('/tickets/:id', ticketController.getTicket);
 router.post('/createtickets', ticketController.createTicket);
 router.put('/updatetickets/:id', ticketController.updateTicket);
 router.delete('/deletetickets/:id', ticketController.deleteTicket);
+router.get('/total-tickets', ticketController.getTotalTickets);
 
 module.exports = router;
